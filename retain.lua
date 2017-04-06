@@ -62,11 +62,12 @@
 
 local json = require("json")
 local awful = require("awful")
+local gfs = require("gears.filesystem")
 local naughty = require("naughty")
 
 local retain = {tags={},layout={}}
 
-retain.tags.savefile = awful.util.get_configuration_dir() .. '.retained'
+retain.tags.savefile = gfs.get_configuration_dir() .. '.retained'
 retain.tags.defaults = {
 	names={"1","2","3","4","5","6","7","8","9"},
 	layouts=awful.layout.suit.floating,
