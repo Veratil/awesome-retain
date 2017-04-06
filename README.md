@@ -2,6 +2,9 @@
 Retain is an Awesome Lua module for retaining tags and their layouts between restarts and screen adds/removes.
 
 ## Dependencies
+Awesome v4.1 or at least after the [`gears.filesystem`](https://github.com/awesomeWM/awesome/tree/f57e3eb48c3532f6fb80f62055e3acc8d82fef4c) commit.  
+*You can change two lines to make it work with Awesome v4.0, see below.*
+
 Retain saves its data in JSON format using [lua-json](http://luaforge.net/projects/luajson/).
 
 ## Usage
@@ -27,7 +30,7 @@ In your `awful.screen.connect_for_each_screen` function, change your `awful.tag(
 `awful.tag(retain.tags.getnames(s), s, retain.tags.getlayouts(s))`
 
 The default save file is:  
-`retain.tags.savefile = awful.util.get_configuration_dir() .. ".retained"`  
+`retain.tags.savefile = gears.filesystem.get_configuration_dir() .. ".retained"`  
 If you want to save to a different location, change the variable `retain.tags.savefile`.
 
 ## Signals added
@@ -37,3 +40,8 @@ Retain connects three functions upon loading:
 * awesome exit, `retain.tags.save_all`
 
 The extra `sid` variable is needed because `index` is queried through the screen list object internally, when a screen is removed the `index` variable is no longer valid.
+
+## Awesome v4.0
+To make it work with Awesome v4.0:
+* Remove the `local gfs = require("gears.filesystem")` line
+* Change `gfs.get_configuration_dir()` to `awful.util.get_configuration_dir()`
