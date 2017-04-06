@@ -99,7 +99,7 @@ end
 
 -- find a layout by name
 local function findLayout(name)
-	for i,l in ipairs(awful.layout.layouts) do
+	for _,l in ipairs(awful.layout.layouts) do
 		if l.name == name then
 			return l
 		end
@@ -225,6 +225,7 @@ awful.screen.connect_for_each_screen(function(s)
 	s.sid = s.index
 end)
 
+-- save on awesome restart or exit
 awesome.connect_signal("exit", retain.tags.save_all)
 
 -- reload on a screen add
