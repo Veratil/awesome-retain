@@ -88,8 +88,7 @@ local function getScreenIndex(scr)
 end
 
 -- gather the tags of a screen by numeric index
-local function gatherTags(sid)
-	local scr = screen[sid]
+local function gatherTags(scr)
 	local tbl = {}
 	for i,v in ipairs(scr.tags) do
 		-- save tag as {tag index = {tag name, tag layout name}}
@@ -131,7 +130,7 @@ function retain.tags.save(scr)
 	if not scr or type(scr) ~= "screen" then return end
 	local si = tostring(scr.sid)
 	-- collect tags and their layout name
-	local tbl = gatherTags(scr.sid)
+	local tbl = gatherTags(scr)
 	-- merge into loaded collection so we don't have to read the file again
 	-- this allows one to connect the screen again at a later time without
 	--  having to read the file again
